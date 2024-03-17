@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Grocery List</h1>
+    {% set current_meal = None %}
+    {% for grocery in groceries %}
+        {% if grocery.meal != current_meal %}
+            {% if not loop.first %}
+                </div> <!-- Close the previous meal container -->
+            {% endif %}
+            <h2><strong>{{ grocery.meal }}</strong></h2>
+            <div class="meal-container">
+            {% set current_meal = grocery.meal %}
+        {% endif %}
+        <div class="ingredient-block">
+            <span class="ingredient">{{ grocery.ingredient }}</span>
+            <span class="amount">{{ grocery.amount }}</span>
+            <div class="clear"></div> <!-- Clear float -->
+            {% if grocery.ingredient2 %}
+                <span class="ingredient2">{{ grocery.ingredient2 }}</span>
+                <span class="amount2">{{ grocery.amount2 }}</span>
+                <div class="clear"></div> <!-- Clear float -->
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
