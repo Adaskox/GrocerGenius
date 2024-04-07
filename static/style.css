@@ -1,0 +1,87 @@
+.ingredient-container, .amount-container {
+    flex: 1; /* Makes each container take up equal space */
+    text-align: center; /* Optional: Centers the text within each container */
+}
+
+.meal-container {
+    margin-bottom: 20px; /* Adds space between each meal container */
+}
+
+.ingredient-block {
+    max-width: 500px;
+    display: flex;
+    align-items: center; /* This ensures that items are vertically centered */
+    justify-content: space-between; /* This spreads out the items to the full width of the container */
+    margin-bottom: 15px; /* Adds space between the ingredient blocks */
+}
+
+.ingredient, .amount {
+    flex-grow: 1;
+    flex-basis: 0; /* Allows the items to grow evenly regardless of their initial width */
+    flex: 1; /* This allows the ingredient and amount to grow and take up equal space */
+    display: inline-block;
+    margin-right: 10px; /* Adjust as needed for spacing between the ingredient name and amount */
+}
+
+/* Custom checkbox and label styling for alignment and spacing */
+.grocery-checkbox + label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    margin-left: 5px; /* Space between the checkbox and its label */
+    /* Add other styling here for alignment and aesthetics */
+}
+
+/* Hide the actual checkbox */
+.grocery-checkbox {
+    display: none;
+}
+
+/* Box for the custom checkbox */
+.grocery-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+/* Checkmark style */
+.grocery-checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 7px;
+    height: 14px;
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    background-color: transparent;
+}
+
+/* Style adjustments for when the checkbox is checked */
+.grocery-checkbox:checked + label:before {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+@media (max-width: 250px) {
+    .ingredient-block {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start for a vertical layout */
+    }
+    .ingredient-container, .amount-container {
+        /* Full width for mobile view */
+        flex: 0 0 100%;
+        margin-right: 0;
+        text-align: left; /* Align text to the left for readability */
+    }
+    .grocery-checkbox + label {
+        margin-left: 0; /* Adjust spacing for mobile */
+    }
+}
