@@ -2,12 +2,14 @@ import csv
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import subprocess
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///groceries.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)  # Initialize Flask-Migrate
 csv_path = r'C:\Users\Adaskox\GrocerGenius\FilteredIngr.csv'  # Update this path to your CSV file's location
+process_excel_script_path = r'C:\Users\Adaskox\GrocerGenius\ExcelExtract.py'
 
 class Grocery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,6 +38,9 @@ def import_groceries_from_csv(csv_path):
 def show_groceries():
     groceries = Grocery.query.all()
     return render_template('groceries.html', groceries=groceries)
+
+if __name__ == '__main__':
+    subprocess.run(['python', process_excel_script_path], check=True)
 
 if __name__ == '__main__':
     with app.app_context():
